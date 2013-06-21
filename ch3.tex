@@ -1,0 +1,70 @@
+\chapter{Floats}
+
+\section{Figures}
+
+Figure~\ref{figure_example1} has a short caption, and
+Figure~\ref{figure_example2} has a longer caption, demonstrating the required
+single-spacing.
+
+\begin{figure}[ht]
+\caption{This is a caption for this figure}
+\label{figure_example1}
+\centering
+\includegraphics[width=1in]{baylor}
+\end{figure}
+
+\begin{figure}[ht]
+\caption[The short table of contents version]{An example of a longer figure
+caption that spans multiple lines and has a corresponding short version for the
+table of contents.}
+\label{figure_example2}
+\centering
+\includegraphics[width=0.25\textwidth]{baylor}
+\end{figure}
+
+\section{Tables}
+
+Table~\ref{table_fruit} and Table~\ref{table_silly} demonstrate tables. Table
+captions differ slightly from figure captions, in that they are \textit{always}
+supposed to be centered, even if they use multiple lines.
+
+\begin{table}[ht]
+\caption[Fruits by color]{\centering Fruits listed by their color. Note that
+captions differ from figure captions in that they are \textit{always} supposed
+to be centered, even if they use multiple lines.}
+\label{table_fruit}
+\begin{center}
+\begin{small}
+\begin{tabular}{rl}
+    \hline
+    \abovespace\belowspace
+    Fruit & Color  \\  \hline
+    \abovespace Orange & Orange \\
+    Blue & Blueberry \\
+    Red & Cherry \\
+    Green & Apple \\
+    Yellow & Banana \\
+    Purple & Eggplant \belowspace \\
+    \hline
+\end{tabular}
+\end{small}
+\end{center}
+\end{table}
+
+\begin{table}[ht]
+\caption[A silly table]{Another table example}
+\label{table_silly}
+\begin{center}
+\begin{small}
+\begin{tabular}{ccc}
+    \hline
+    \abovespace\belowspace
+    A & B & C \\  \hline
+    \abovespace 1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    7 & 8 & 9 \belowspace \\
+    \hline
+\end{tabular}
+\end{small}
+\end{center}
+\end{table}

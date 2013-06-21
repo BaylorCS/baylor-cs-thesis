@@ -1,0 +1,89 @@
+% Baylor University Master's Thesis LaTeX template
+% Template created by Jonathan Drake (2013)
+
+% Thesis class, based on report
+\documentclass
+[
+	%short,	% omit front matter
+	%draft, 	% draft heading, don't load graphics, etc.
+]
+{thesis}
+
+% Optional additional packages
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{chicago}
+
+% Thesis parameters
+\title{Baylor University Master's Thesis \LaTeX\ Template}
+\author{Your Name}
+\holding{B.S.}
+\seeking{M.S.}
+\degree{Master of Science}
+\date{June 2013}
+
+% Administration
+\graduateDean{J. Larry Lyon, Ph.D.}
+\department{Department of Computer Science}
+\departmentChair{Gregory D. Speegle, Ph.D.}
+
+% Supervisor (adviser / mentor)
+\supervisor{Name O. Supervisor, Ph.D.}
+\supervisorTitle{Mentor}
+
+%  Readers (committee members)
+\readerOne{Your A. Reader, Ph.D.}
+\readerTwo{U. Another Reader, Psy.D.}
+\readerThree{J. J. J. Heimer-Schmidt, M.D.}
+%\readerFour{...}
+%\readerFive{...}
+
+% Abstract
+\abstract{This is the abstract. Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. Pellentesque tempus vitae turpis id lobortis. Curabitur semper
+lacus sapien, eget accumsan dolor posuere ac. Phasellus a leo varius, ultrices
+nibh et, convallis urna. Proin in libero scelerisque velit suscipit fringilla.
+Cras quis erat sed nunc blandit dapibus ut eget libero. Cras malesuada tortor ut
+dolor tempor tincidunt. Morbi vel nulla vitae felis mollis scelerisque eget in
+mauris. Phasellus ipsum diam, vehicula egestas volutpat auctor, malesuada
+consequat elit. Nunc posuere risus eget orci vulputate, eget ullamcorper ante
+auctor.}
+
+% Acknowledgments (optional)
+\acknowledgements{I want to express my great appreciation to several people.
+Aenean vulputate, est eget tempor dignissim, massa magna dignissim nulla, quis
+pharetra nulla libero ac libero. Cras id ornare augue. Nunc auctor nunc at dolor
+mattis suscipit. Vestibulum eu fringilla est. Morbi elementum varius ornare.
+Nulla vitae nibh sed lectus posuere tincidunt. Praesent sed dignissim turpis.
+Nulla euismod dolor nec nulla ornare blandit.}
+
+% Dedication (optional)
+\dedication{\it Pour la rose qui fait important le temps qu'on perd}
+
+% List of figures (optional)
+\makeListOfFigures
+
+% List of tables (optional)
+\makeListOfTables
+
+% Document body
+\begin{document}
+
+	% Chapters
+	\include{ch1}
+	\include{ch2} 
+	\include{ch3}
+	\include{ch4}
+	\include{ch5}
+	
+	% Appendices (optional)
+	\begin{appendices}
+		\include{appendixA}
+		\include{appendixB}
+	\end{appendices}
+	
+	% Bibliography
+	\bibliographystyle{chicago} % or whatever style your department uses
+	\bibliography{thesis}
+	
+\end{document}
