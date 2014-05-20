@@ -2,7 +2,7 @@
 %
 % Baylor University Master's Thesis LaTeX Template
 % 
-% Last Updated in June 2013
+% Last Updated in June 2014
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -10,10 +10,19 @@
 % created by Jeff Donahoo (2000), with additional
 % inspiration from a template by David Jack (2011);
 % rewritten and simplified by Jonathan Drake (2013).
+% additional stuff by Alvin Jude
 %
 % %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesClass{thesis}[2013/06/01]
+% ================== Changelog ================================
+% Added \comment{} - simplifies multiline comments
+% Added 2 space after section and subsection
+%
+%
+%
+% =============================================================
+
+\ProvidesClass{thesis}[2014/06/01]
 
 % Class options:
 % draft	draft heading, no graphics loaded, etc.
@@ -28,6 +37,9 @@
 
 % Load the parent class: report
 \LoadClass[12pt,letterpaper]{report}
+% ALVIN: Simplifies adding comments
+\newcommand{\comment}[1]{}
+
 
 % General document configuration
 \AtBeginDocument
@@ -166,17 +178,18 @@
 }
 
 % Section headings
+% \@startsection{<name>}{<level>}{<indent>}{<beforeskip>}{<afterskip>}{<style>}*[<altheading>]{<heading>}
 \renewcommand{\section}
 {%
 	\@startsection{section}{1}{0pt}%
-	{4ex }{0.001ex}%
+	{4ex }{4ex}%skip: 2 space before, 2 space after
 	{\centering\normalfont\slshape\normalsize}
 }
 	
 \renewcommand{\subsection}
 {%
 	\@startsection{subsection}{2}{0pt}%
-	{4ex}{0.001ex}%
+	{4ex}{4ex}% skip: 2 space before, 2 space after
 	{\normalfont\slshape\normalsize}
 }
 
