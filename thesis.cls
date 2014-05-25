@@ -67,6 +67,12 @@
 	\brokenpenalty=10000 % Discourages page breaks at hyphens
 	\clubpenalty=10000 % Discourages orphan lines
 	\widowpenalty=10000 % Discourages widow lines
+	
+	%% This is confusing -----------------------------
+	% aboveskip = distance between caption and table
+	% belowskip = distace between caption and text
+	\captionsetup{belowskip=8ex,aboveskip=4ex}
+
 }
 
 % We need both double and single spacing
