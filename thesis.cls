@@ -68,14 +68,17 @@
 	\clubpenalty=10000 % Discourages orphan lines
 	\widowpenalty=10000 % Discourages widow lines
 	
-	%% This is confusing -----------------------------
+	% -----------------------------------------------
+	% TABLE FORMATING STUFF
+	%% This is confusing 
 	% aboveskip = distance between caption and table
 	% belowskip = distace between caption and text
 	\captionsetup{belowskip=0ex,aboveskip=4ex}
 	% because we set this which determines the distance between the table 
 	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
-	\setlength{\intextsep}{8ex}
-
+	\setlength{\intextsep}{8ex} % Vertical space above / before
+	\setlength{\textfloatsep}{8ex} % Vertical space below / after 
+	% -----------------------------------------------
 }
 
 % We need both double and single spacing
@@ -180,7 +183,7 @@
 		\MakeUppercase{\@chapapp{}}%
 		\hspace{-0.25em}%
 		\arabicText{\thechapter}\\
-		#2\\
+		\singlespacing{#2}\\
 		\vspace{0.13in}
 	}
 	\@afterheading
@@ -499,12 +502,13 @@
 \newcommand*{\makeListOfTables}{\@makeLoTtrue}
 
 % Handy table spacing macros: \abovespace, \belowspace
-\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
-\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
-\def\abovespace{\abovestrut{0.20in}}
-\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
-\def\belowspace{\belowstrut{0.10in}}
-\def\amanda{\abovespace\belowspace}%wins every time
+%% Alvin's Note: not sure what this does. Apparently nothing. Ignore. BAD AMANDA
+%\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
+%\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
+%\def\abovespace{\abovestrut{0.20in}}
+%\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
+%\def\belowspace{\belowstrut{0.10in}}
+%\def\amanda{\abovespace\belowspace}%wins every time
 
 % Handy thing for getting good spacing when section and subsection are adjacent
 \newcommand*{\stack}{\vspace{4ex}}
