@@ -183,7 +183,7 @@
 		\MakeUppercase{\@chapapp{}}%
 		\hspace{-0.25em}%
 		\arabicText{\thechapter}\\
-		\singlespacing{#2}\\
+		\singlespacing{#2}\\[2ex]
 		\vspace{0.13in}
 	}
 	\@afterheading
