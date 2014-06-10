@@ -71,7 +71,10 @@
 	%% This is confusing -----------------------------
 	% aboveskip = distance between caption and table
 	% belowskip = distace between caption and text
-	\captionsetup{belowskip=8ex,aboveskip=4ex}
+	\captionsetup{belowskip=0ex,aboveskip=4ex}
+	% because we set this which determines the distance between the table 
+	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
+	\setlength{\intextsep}{8ex}
 
 }
 
