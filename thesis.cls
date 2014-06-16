@@ -40,7 +40,6 @@
 % ALVIN: Simplifies adding comments
 \newcommand{\comment}[1]{}
 
-
 % General document configuration
 \AtBeginDocument
 {
@@ -53,7 +52,7 @@
 	\setlength{\textwidth}{6.0in} % 1.25in margins
 	\setlength{\oddsidemargin}{0.25in} % 1.25in margin relative to 1in default
 	\setlength{\evensidemargin}{0.25in} % 1.25in margin relative to 1in default
-	\setlength{\parindent}{0.5in}
+	\setlength{\parindent}{0.5in} % used in triplespace
 	\setlength{\labelsep}{0.5em}
 	\setlength{\labelwidth}{1.5em}
 	
@@ -181,9 +180,10 @@
 		\centering
 		\vspace*{0.25in}
 		\MakeUppercase{\@chapapp{}}%
-		\hspace{-0.25em}%
-		\arabicText{\thechapter}\\
-		\singlespacing{#2}\\[2ex]
+		\hspace{-0.25em} % for the chapter text to look pretty. 
+		\arabicText{\thechapter}
+		\vspace{-1ex}
+		\singlespacing{#2}\\
 		\vspace{0.13in}
 	}
 	\@afterheading
@@ -194,21 +194,21 @@
 \renewcommand{\section}
 {%
 	\@startsection{section}{1}{0pt}%
-	{4ex }{4ex}%skip: 2 space before, 2 space after
+	{2ex}{2ex}%skip: 2 space before, 2 space after. adjusted to 5ex because the title had to move 1 up. 
 	{\centering\normalfont\slshape\normalsize}
 }
 	
 \renewcommand{\subsection}
 {%
 	\@startsection{subsection}{2}{0pt}%
-	{4ex}{4ex}% skip: 2 space before, 2 space after
+	{2ex}{2ex}% skip: 2 space before, 2 space after
 	{\normalfont\slshape\normalsize}
 }
 
 \renewcommand{\subsubsection}
 {%
 	\@startsection{subsubsection}{3}{\parindent}%
-	{4ex}{-1em}%
+	{2ex}{-1em}%
 	{\normalfont\slshape\normalsize}
 }
 
@@ -343,12 +343,9 @@
 		\thesisAuthorName, \thesisSeeking
 		\ \\
         \thesisMentorTitle: \thesisMentor
-        \vspace*{0.08in}
     \end{center}
-    \doublespacing
-	\hspace{\parindent}
-	\thesisAbstract
-	\clearpage
+    \thesisAbstract
+    \clearpage
 }
 
 % Table of contents page
