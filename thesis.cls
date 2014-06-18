@@ -24,7 +24,6 @@
 
 \ProvidesClass{thesis}[2014/06/01]
 
-% Class options:
 % draft	draft heading, no graphics loaded, etc.
 % short	front matter omitted
 \newif\if@makeDraftThesis
@@ -75,8 +74,8 @@
 	\captionsetup{belowskip=0ex,aboveskip=4ex}
 	% because we set this which determines the distance between the table 
 	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
-	\setlength{\intextsep}{8ex} % Vertical space above / before
-	\setlength{\textfloatsep}{8ex} % Vertical space below / after 
+	\setlength{\intextsep}{4ex} % Vertical space above / before
+	\setlength{\textfloatsep}{4ex} % Vertical space below / after 
 	% -----------------------------------------------
 }
 
@@ -210,6 +209,23 @@
 	\@startsection{subsubsection}{3}{\parindent}%
 	{2ex}{-1em}%
 	{\normalfont\slshape\normalsize}
+}
+
+%% standardize itemize and enumerate spacing
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+%% standardize itemize and enumerate spacing
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
 }
 
 % Internal boolean variables
@@ -500,12 +516,12 @@
 
 % Handy table spacing macros: \abovespace, \belowspace
 %% Alvin's Note: not sure what this does. Apparently nothing. Ignore. BAD AMANDA
-%\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
-%\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
-%\def\abovespace{\abovestrut{0.20in}}
-%\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
-%\def\belowspace{\belowstrut{0.10in}}
-%\def\amanda{\abovespace\belowspace}%wins every time
+\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
+\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
+\def\abovespace{\abovestrut{0.20in}}
+\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
+\def\belowspace{\belowstrut{0.10in}}
+\def\amanda{\abovespace\belowspace}%wins every time
 
 % Handy thing for getting good spacing when section and subsection are adjacent
 \newcommand*{\stack}{\vspace{4ex}}
