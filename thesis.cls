@@ -66,28 +66,48 @@
 	\clubpenalty=10000 % Discourages orphan lines
 	\widowpenalty=10000 % Discourages widow lines
 	
-	% -----------------------------------------------
-	% TABLE FORMATING STUFF
-	%% This is confusing 
-	% aboveskip = distance between caption and table
-	% belowskip = distace between caption and text
-	\captionsetup{belowskip=0ex,aboveskip=4ex}
-	% because we set this which determines the distance between the table 
-	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
-	\setlength{\intextsep}{4ex} % Vertical space above / before
-	\setlength{\textfloatsep}{4ex} % Vertical space below / after 
-	% -----------------------------------------------
+	
 }
 
 % We need both double and single spacing
 \RequirePackage{setspace}
 
+% -----------------------------------------------
+% TABLE FORMATING STUFF
+% This is confusing because the caption is at the top. 
+%%%%%%% THERE HAS TO BE A BETTER WAY JIM
+% aboveskip = distance between caption and float
+% belowskip = distace between caption and text
 % Set the caption label separator and spacing for all floats
 \RequirePackage{caption}
 \captionsetup{labelsep=period,font=singlespacing}
+\captionsetup[table]{belowskip=-0.1em, aboveskip=1em} 
+%\captionsetup[figure]{belowskip=2em, aboveskip=2em}
 
+	% because we set this which determines the distance between the table 
+	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
+	% this is also applicable for the images and pictures. Fortunately the configuration
+	% for both are the same. If they're not, then we're in big barney
+	\setlength{\intextsep}{2em} % Vertical space for floats in the middle of the page
+	\setlength{\textfloatsep}{2.1em} % Vertical space for floats at the top of the page
+	% -----------------------------------------------
+	\setlength{\abovecaptionskip}{2em}
+	\setlength{\belowcaptionskip}{-0.01em}
+	
 % Fix the ToC style for appendices
 \RequirePackage[titletoc]{appendix}
+
+% Optional additional packages
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{chicago}
+% ALVIN: Needs this
+\RequirePackage{multirow}
+\RequirePackage{hhline}
+\RequirePackage{url} % for bibtex
+\RequirePackage{newclude}
+\RequirePackage{breakcites}
+
 
 % Set the names of prologue pages
 \newcommand*{\ToCname}{TABLE OF CONTENTS}
@@ -134,6 +154,8 @@
 \setlength{\leftmargin}{\leftmargini}
 \setlength{\labelwidth}{1.5em}
 
+
+	
 % Macro that converts the given number to a corresponding number name
 \newcommand{\arabicText}[1]
 {
@@ -192,22 +214,19 @@
 % \@startsection{<name>}{<level>}{<indent>}{<beforeskip>}{<afterskip>}{<style>}*[<altheading>]{<heading>}
 \renewcommand{\section}
 {%
-	\@startsection{section}{1}{0pt}%
-	{2ex}{2ex}%skip: 2 space before, 2 space after. adjusted to 5ex because the title had to move 1 up. 
+	\@startsection{section}{1}{0pt}{1em}{1em}%skip: 2 space before, 2 space after. adjusted to 5ex because the title had to move 1 up. 
 	{\centering\normalfont\slshape\normalsize}
 }
 	
 \renewcommand{\subsection}
 {%
-	\@startsection{subsection}{2}{0pt}%
-	{2ex}{2ex}% skip: 2 space before, 2 space after
+	\@startsection{subsection}{2}{0pt}{1em}{0.1pt}% skip: 2 space before, 2 space after
 	{\normalfont\slshape\normalsize}
 }
 
 \renewcommand{\subsubsection}
 {%
-	\@startsection{subsubsection}{3}{\parindent}%
-	{2ex}{-1em}%
+	\@startsection{subsubsection}{3}{\parindent}{1em}{-1em}%
 	{\normalfont\slshape\normalsize}
 }
 
@@ -215,17 +234,17 @@
 \let\oldenumerate\enumerate
 \renewcommand{\enumerate}{
   \oldenumerate
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
+  \setlength{\itemsep}{1em}
+  \setlength{\parskip}{-1em}
+  \setlength{\parsep}{0pt}	  
 }
 %% standardize itemize and enumerate spacing
 \let\olditemize\itemize
 \renewcommand{\itemize}{
   \olditemize
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
+  \setlength{\itemsep}{1em}
+  \setlength{\parskip}{-1em}
+  \setlength{\parsep}{0pt}	  
 }
 
 % Internal boolean variables
