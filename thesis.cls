@@ -16,15 +16,19 @@
 
 % ================== Changelog ================================
 % Added \comment{} - simplifies multiline comments
-% Added 2 space after section and subsection
-%
-%
-%
+% Fixed spaces after floats: images & tables
+% -- NOTE: 
+%    This only works when floats are at to of page. There is no guarantee that inline images and tables
+%    Will actually work. If anybody needs this, will need to be fixed     
+% final version changelog:
+% Dedication: Moved to 3 inches from the top, removed title ("DEDICATION") from the top of the page
+% Double spacing AFTER level 3 (\subsection) when text follows. 
+% Add period after level 5 (followed by 2 spaces)
+% Added APPENDICES separator page
 % =============================================================
 
 \ProvidesClass{thesis}[2014/06/01]
 
-% Class options:
 % draft	draft heading, no graphics loaded, etc.
 % short	front matter omitted
 \newif\if@makeDraftThesis
@@ -40,7 +44,6 @@
 % ALVIN: Simplifies adding comments
 \newcommand{\comment}[1]{}
 
-
 % General document configuration
 \AtBeginDocument
 {
@@ -53,7 +56,7 @@
 	\setlength{\textwidth}{6.0in} % 1.25in margins
 	\setlength{\oddsidemargin}{0.25in} % 1.25in margin relative to 1in default
 	\setlength{\evensidemargin}{0.25in} % 1.25in margin relative to 1in default
-	\setlength{\parindent}{0.5in}
+	\setlength{\parindent}{0.5in} % used in triplespace
 	\setlength{\labelsep}{0.5em}
 	\setlength{\labelwidth}{1.5em}
 	
@@ -66,18 +69,51 @@
 	
 	\brokenpenalty=10000 % Discourages page breaks at hyphens
 	\clubpenalty=10000 % Discourages orphan lines
-	\widowpenalty=10000 % Discourages widow lines
+	{\widowpenalties 4 10000 10000 -10000 0 \brokenpenalty 0 \par}
+	\raggedbottom
+	
+	
 }
 
 % We need both double and single spacing
 \RequirePackage{setspace}
 
+% -----------------------------------------------
+% TABLE FORMATING STUFF
+% This is confusing because the caption is at the top. 
+%%%%%%% THERE HAS TO BE A BETTER WAY JIM
+% aboveskip = distance between caption and float
+% belowskip = distace between caption and text
 % Set the caption label separator and spacing for all floats
 \RequirePackage{caption}
 \captionsetup{labelsep=period,font=singlespacing}
+\captionsetup[table]{belowskip=-0.1em, aboveskip=1em} 
+%\captionsetup[figure]{belowskip=2em, aboveskip=2em}
 
+	% because we set this which determines the distance between the table 
+	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
+	% this is also applicable for the images and pictures. Fortunately the configuration
+	% for both are the same. If they're not, then we're in big barney
+	\setlength{\intextsep}{2em} % Vertical space for floats in the middle of the page
+	\setlength{\textfloatsep}{2.1em} % Vertical space for floats at the top of the page
+	% -----------------------------------------------
+	\setlength{\abovecaptionskip}{2em}
+	\setlength{\belowcaptionskip}{-0.01em}
+	
 % Fix the ToC style for appendices
 \RequirePackage[titletoc]{appendix}
+
+% Optional additional packages
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{chicago}
+% ALVIN: Needs this
+\RequirePackage{multirow}
+\RequirePackage{hhline}
+\RequirePackage{url} % for bibtex
+\RequirePackage{newclude}
+\RequirePackage{breakcites}
+
 
 % Set the names of prologue pages
 \newcommand*{\ToCname}{TABLE OF CONTENTS}
@@ -86,6 +122,7 @@
 \newcommand*{\acknowledgename}{ACKNOWLEDGMENTS}
 \newcommand*{\dedicationname}{DEDICATION}
 \newcommand*{\appendicesname}{APPENDIX}
+\newcommand*{\appendicestitle}{APPENDICES} % Plural because more than one
 \renewcommand*{\chaptername}{CHAPTER}
 \newcommand*{\bibliographyname}{BIBLIOGRAPHY}
 
@@ -124,6 +161,8 @@
 \setlength{\leftmargin}{\leftmargini}
 \setlength{\labelwidth}{1.5em}
 
+
+	
 % Macro that converts the given number to a corresponding number name
 \newcommand{\arabicText}[1]
 {
@@ -169,9 +208,10 @@
 		\centering
 		\vspace*{0.25in}
 		\MakeUppercase{\@chapapp{}}%
-		\hspace{-0.25em}%
-		\arabicText{\thechapter}\\
-		#2\\
+		\hspace{-0.25em} % for the chapter text to look pretty. 
+		\arabicText{\thechapter}
+		\vspace{-1ex}
+		\singlespacing{#2}\\
 		\vspace{0.13in}
 	}
 	\@afterheading
@@ -181,23 +221,37 @@
 % \@startsection{<name>}{<level>}{<indent>}{<beforeskip>}{<afterskip>}{<style>}*[<altheading>]{<heading>}
 \renewcommand{\section}
 {%
-	\@startsection{section}{1}{0pt}%
-	{4ex }{4ex}%skip: 2 space before, 2 space after
+	\@startsection{section}{1}{0pt}{1em}{0.001ex}%skip: 2 space before, 1 space after. adjusted to 0.001 so that it's virually none
 	{\centering\normalfont\slshape\normalsize}
 }
 	
 \renewcommand{\subsection}
 {%
-	\@startsection{subsection}{2}{0pt}%
-	{4ex}{4ex}% skip: 2 space before, 2 space after
+	\@startsection{subsection}{2}{0pt}{1em}{0.001ex}% skip: 2 space before, 2 space after
 	{\normalfont\slshape\normalsize}
 }
 
-\renewcommand{\subsubsection}
+\renewcommand{\subsubsection}[1]
 {%
-	\@startsection{subsubsection}{3}{\parindent}%
-	{4ex}{-1em}%
-	{\normalfont\slshape\normalsize}
+	\@startsection{subsubsection}{3}{\parindent}{1em}{-1em}%
+	{\normalfont\slshape\normalsize}{#1\hspace{-3ex}}{.} %adds a period/fullstop/dot after the title
+}
+
+%% standardize itemize and enumerate spacing
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1em}
+  \setlength{\parskip}{-1em}
+  \setlength{\parsep}{0pt}	  
+}
+%% standardize itemize and enumerate spacing
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1em}
+  \setlength{\parskip}{-1em}
+  \setlength{\parsep}{0pt}	  
 }
 
 % Internal boolean variables
@@ -331,12 +385,9 @@
 		\thesisAuthorName, \thesisSeeking
 		\ \\
         \thesisMentorTitle: \thesisMentor
-        \vspace*{0.08in}
     \end{center}
-    \doublespacing
-	\hspace{\parindent}
-	\thesisAbstract
-	\clearpage
+    \thesisAbstract
+    \clearpage
 }
 
 % Table of contents page
@@ -391,12 +442,27 @@
 		\thispagestyle{plain}
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
 		\addcontentsline{toc}{part}{\normalsize\normalfont\dedicationname}
-		\begin{center}\vspace*{0.25in}\normalfont\normalsize\dedicationname\end{center}
-		
+		%\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % SHOWS the dedication title on the page
+		\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % DOES NOT show the dedication title on the actual page
+		\vspace{0.75in} % badhack to make sure dedication starts at 3inches from the top
 		\begin{center}\th@dedicationStash\end{center}
 		\clearpage
 	\fi
 }
+
+\newcommand{\thesisAppendixPage}{
+
+		\thispagestyle{plain}
+		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\addcontentsline{toc}{part}{\normalsize\normalfont\appendicestitle}
+		%\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % SHOWS the dedication title on the page
+		\vspace*{\fill}
+		\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % DOES NOT show the dedication title on the actual page
+		\begin{center}\appendicestitle\end{center}
+		\vspace*{\fill}
+		\clearpage
+}
+
 
 % The thesis prologue (front matter)
 \newcommand{\thesisPrologue}
@@ -490,6 +556,7 @@
 \newcommand*{\makeListOfTables}{\@makeLoTtrue}
 
 % Handy table spacing macros: \abovespace, \belowspace
+%% Alvin's Note: not sure what this does. Apparently nothing. Ignore. BAD AMANDA
 \def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
 \def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
 \def\abovespace{\abovestrut{0.20in}}
