@@ -67,12 +67,6 @@
 	\setcounter{tocdepth}{2}
 	\setcounter{secnumdepth}{3}
 	
-	\brokenpenalty=10000 % Discourages page breaks at hyphens
-	\clubpenalty=10000 % Discourages orphan lines
-	{\widowpenalties 4 10000 10000 -10000 0 \brokenpenalty 0 \par}
-	\raggedbottom
-	
-	
 }
 
 % We need both double and single spacing
@@ -87,18 +81,18 @@
 % Set the caption label separator and spacing for all floats
 \RequirePackage{caption}
 \captionsetup{labelsep=period,font=singlespacing}
-\captionsetup[table]{belowskip=-0.1em, aboveskip=1em} 
+\captionsetup[table]{belowskip=-0.1em, aboveskip=1em, justification=centering} 
 %\captionsetup[figure]{belowskip=2em, aboveskip=2em}
 
-	% because we set this which determines the distance between the table 
-	% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
-	% this is also applicable for the images and pictures. Fortunately the configuration
-	% for both are the same. If they're not, then we're in big barney
-	\setlength{\intextsep}{2em} % Vertical space for floats in the middle of the page
-	\setlength{\textfloatsep}{2.1em} % Vertical space for floats at the top of the page
-	% -----------------------------------------------
-	\setlength{\abovecaptionskip}{2em}
-	\setlength{\belowcaptionskip}{-0.01em}
+% because we set this which determines the distance between the table 
+% and the preeceeding / proceeding text, we HAVE to set the belowskip in the thing above to 0
+% this is also applicable for the images and pictures. Fortunately the configuration
+% for both are the same. If they're not, then we're in big barney
+\setlength{\intextsep}{2em} % Vertical space for floats in the middle of the page
+\setlength{\textfloatsep}{2.1em} % Vertical space for floats at the top of the page
+% -----------------------------------------------
+\setlength{\abovecaptionskip}{2em}
+\setlength{\belowcaptionskip}{-0.01em}
 	
 % Fix the ToC style for appendices
 \RequirePackage[titletoc]{appendix}
@@ -113,7 +107,12 @@
 \RequirePackage{url} % for bibtex
 \RequirePackage{newclude}
 \RequirePackage{breakcites}
+\RequirePackage[titles]{tocloft}
 
+\brokenpenalty=10000	% Eliminates page breaks at hyphens
+\clubpenalty=10000 		% Eliminates orphan lines
+\widowpenalty=10000 	% Eliminates widowed lines
+	
 
 % Set the names of prologue pages
 \newcommand*{\ToCname}{TABLE OF CONTENTS}
@@ -193,13 +192,15 @@
 % Chapter heading
 \def\@chapter[#1]#2
 {
+
 	\ifnum \c@secnumdepth >\m@ne
 		\refstepcounter{chapter}%
 		\typeout{**************************}
 		\typeout{Chapter \thechapter}%
+
 		\addcontentsline{toc}{chapter}{\protect\numberline{\rm\thechapter}\rm#1}
 	\else
-		\addcontentsline{toc}{chapter}{#1}%
+		\addcontentsline{toc}{chapter}{\singlespacing{#2}}%
 	\fi
 	\chaptermark{#1}%
 	\addtocontents{lof}{\protect\addvspace{8\p@}} % 8pt spacing
@@ -224,11 +225,15 @@
 	\@startsection{section}{1}{0pt}{1em}{0.001ex}%skip: 2 space before, 1 space after. adjusted to 0.001 so that it's virually none
 	{\centering\normalfont\slshape\normalsize}
 }
+% IF there is content text immediately after level 3, 
+%   THEN distance between Level 3 and Content text = doublespace.
+% IF there is level 4 header immediately after level 3, 
+%   THEN distance between Level 3 and Level 4 = triplespace. 
 	
-\renewcommand{\subsection}
-{%
-	\@startsection{subsection}{2}{0pt}{1em}{0.001ex}% skip: 2 space before, 2 space after
-	{\normalfont\slshape\normalsize}
+\renewcommand{\subsection}[1]
+{
+	\@startsection{subsection}{2}{0pt}{0.001ex}{0.001ex}
+	{\vspace{1em}\normalfont\slshape\normalsize}{#1}
 }
 
 \renewcommand{\subsubsection}[1]
@@ -249,9 +254,17 @@
 \let\olditemize\itemize
 \renewcommand{\itemize}{
   \olditemize
+  \setlength{\parsep}{-\baselineskip}	  
   \setlength{\itemsep}{1em}
   \setlength{\parskip}{-1em}
-  \setlength{\parsep}{0pt}	  
+  
+}
+
+% removes extra space after the list (itemize). So it will be double space instead of triple
+\let\@oldlistI\@listI
+\renewcommand{\@listI}{
+	\@oldlistI
+	\topsep=0pt
 }
 
 % Internal boolean variables
@@ -390,11 +403,28 @@
     \clearpage
 }
 
+
 % Table of contents page
+% Massive change just because overflowing chapter titles have to be single-spaced
+% uses the tocloft package
+%\renewcommand\cftchapleader{\cftdotfill{\cftchapdotsep}}
+\renewcommand\cftchapdotsep{\cftsecdotsep} % first define the chap dots to be equal to the section dots
+\renewcommand\cftchapleader{\normalfont\cftdotfill{\cftchapdotsep}} % then remove the bolds. 
+\renewcommand\cftchappagefont{\normalfont} % this defaults to bold, overwrite that. 
+\renewcommand\cftpartpagefont{\normalfont}
+\renewcommand\cftpartafterpnum{\vspace{1em}}
+\renewcommand\cftchapafterpnum{\vspace{1em}}
+\renewcommand\cftsecafterpnum{\vspace{1em}}
+\renewcommand\cftsubsecafterpnum{\vspace{1em}}
+\renewcommand\cftsubsubsecafterpnum{\vspace{1em}}
 \newcommand{\thesisToCpage}
 {
+
 	\renewcommand*{\contentsname}{\vspace*{-0.5in}\centering\normalsize\normalfont\ToCname\vspace{-0.25in}}
+	\begin{singlespace}
 	\tableofcontents
+	\end{singlespace}
+
 	\clearpage
 }
 
@@ -557,12 +587,12 @@
 
 % Handy table spacing macros: \abovespace, \belowspace
 %% Alvin's Note: not sure what this does. Apparently nothing. Ignore. BAD AMANDA
-\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
-\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
-\def\abovespace{\abovestrut{0.20in}}
-\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
-\def\belowspace{\belowstrut{0.10in}}
-\def\amanda{\abovespace\belowspace}%wins every time
+%\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
+%\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
+%\def\abovespace{\abovestrut{0.20in}}
+%\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
+%\def\belowspace{\belowstrut{0.10in}}
+%\def\amanda{\abovespace\belowspace}%wins every time
 
 % Handy thing for getting good spacing when section and subsection are adjacent
 \newcommand*{\stack}{\vspace{4ex}}
