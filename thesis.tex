@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{chicago}
+\usepackage{lipsum} % Because this comes with a demo
 
 % Thesis parameters
 \title{Baylor University Master's Thesis \LaTeX\ Template}
@@ -76,8 +77,14 @@ Nulla euismod dolor nec nulla ornare blandit.}
 	\include{ch4}
 	\include{ch5}
 	
+<<<<<<< Updated upstream
 	% Appendices (optional)%
     \thesisAppendixPage
+=======
+	% Appendices (optional)
+	% TODO: make the thesisAppendixPage automagic if the \begin{appendices} exists
+	\thesisAppendixPage 
+>>>>>>> Stashed changes
 	\begin{appendices}
 		\include{appendixA}
 		\include{appendixB}
