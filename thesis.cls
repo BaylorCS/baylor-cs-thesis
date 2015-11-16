@@ -192,7 +192,9 @@
 % Chapter heading
 \def\@chapter[#1]#2
 {
-
+	% the footnotes should start with 1 in each chapter
+	\setcounter{footnoteA}{0}
+	
 	\ifnum \c@secnumdepth >\m@ne
 		\refstepcounter{chapter}%
 		\typeout{**************************}
@@ -207,7 +209,7 @@
 	\addtocontents{lot}{\protect\addvspace{8\p@}} % 8pt spacing
 	{
 		\centering
-		\vspace*{0.25in}
+		\vspace*{0.43in}
 		\MakeUppercase{\@chapapp{}}%
 		\hspace{-0.25em} % for the chapter text to look pretty. 
 		\arabicText{\thechapter}
@@ -330,13 +332,13 @@
 	\singlespacing
     	Submitted to the Graduate Faculty of\\ 
 	Baylor University in Partial Fulfillment of the \\
-	Requirements for the Degree of \\
-	\doublespacing
+	Requirements for the Degree \\
+	of \\
 	\thesisDegree
 	
 	\vspace{0.25in}
 	\vfill
-	
+	\doublespacing
 	{
 		\addtolength{\leftskip}{-2.25in}
      		Approved by the Thesis Committee
@@ -400,6 +402,7 @@
 		\ \\
         \thesisMentorTitle: \thesisMentor
     \end{center}
+    \par
     \thesisAbstract
     \clearpage
 }
@@ -418,10 +421,12 @@
 \renewcommand\cftsecafterpnum{\vspace{1em}}
 \renewcommand\cftsubsecafterpnum{\vspace{1em}}
 \renewcommand\cftsubsubsecafterpnum{\vspace{1em}}
+\renewcommand\cftfigafterpnum{\vspace{1em}}
+\renewcommand\cfttabafterpnum{\vspace{1em}}
 \newcommand{\thesisToCpage}
 {
 
-	\renewcommand*{\contentsname}{\vspace*{-0.5in}\centering\normalsize\normalfont\ToCname\vspace{-0.25in}}
+	\renewcommand*{\contentsname}{\vspace*{-0.27in}\centering\normalsize\normalfont\ToCname\vspace{-0.25in}}
 	\begin{singlespace}
 	\tableofcontents
 	\end{singlespace}
@@ -435,8 +440,10 @@
 	\if@makeLoF
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
 		\addcontentsline{toc}{part}{\normalsize\normalfont\LoFname}
-		\renewcommand*{\listfigurename}{\vspace*{-0.5in}\centering\normalsize\normalfont\LoFname\vspace{-0.25in}}
+		\renewcommand*{\listfigurename}{\vspace*{-0.27in}\centering\normalsize\normalfont\LoFname\vspace{-0.25in}}
+		\begin{singlespace}
 		\listoffigures
+		\end{singlespace}
 		\clearpage
 	\fi
 }
@@ -446,8 +453,10 @@
 	\if@makeLoT
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
 		\addcontentsline{toc}{part}{\normalsize\normalfont\LoTname}
-		\renewcommand*{\listtablename}{\vspace*{-0.5in}\centering\normalsize\normalfont\LoTname\vspace{-0.25in}}
+		\renewcommand*{\listtablename}{\vspace*{-0.27in}\centering\normalsize\normalfont\LoTname\vspace{-0.25in}}
+		\begin{singlespace}
 		\listoftables
+		\end{singlespace}
 		\clearpage
 	\fi
 }
@@ -459,7 +468,7 @@
 		\thispagestyle{plain}
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
 		\addcontentsline{toc}{part}{\normalsize\normalfont\acknowledgename}
-		\begin{center}\vspace*{0.25in}\normalfont\normalsize\acknowledgename\end{center}
+		\begin{center}\vspace*{0.3in}\normalfont\normalsize\acknowledgename\end{center}
 		\hspace{\parindent}
 		\th@acknowledgementsStash
 		\clearpage
@@ -524,7 +533,7 @@
 	{
 		\clearpage
 		\addcontentsline{toc}{chapter}{\bibname}
-		\vspace*{0.25in}
+		\vspace*{0.43in}
 		\centering\normalfont\normalsize\bibname
 		\vspace{2ex}
 		\singlespacing
@@ -597,3 +606,14 @@
 
 % Alvin's Note: Stacking is obsolete. Handled by the subsections respective headers 
 \newcommand*{\stack}{}
+
+% Rysavy: footnotes must have the same indent as paragraph
+\RequirePackage{manyfoot}
+% the footnote indent should be 0.5in, which is parindent
+\SetFootnoteHook{\singlespace\hspace{\dimexpr 0.5in-3ex \relax}}
+\DeclareNewFootnote{A}
+% the footnotes need to start with 1 at the beginning of each chapter
+\renewcommand{\footnote}[1]{\footnoteA{#1}}
+
+% if you start a chapter without a section, you need this to have the paragraph indented
+\RequirePackage{indentfirst}
