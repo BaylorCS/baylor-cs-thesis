@@ -14,6 +14,7 @@
 \usepackage{amsmath}
 \usepackage{chicago}
 \usepackage{lipsum} % Because this comes with a demo
+\usepackage{hyperref}
 
 % Thesis parameters
 \title{Baylor University Master's Thesis \LaTeX\ Template}
@@ -81,6 +82,7 @@ Nulla euismod dolor nec nulla ornare blandit.}
 	% TODO: make the thesisAppendixPage automagic if the \begin{appendices} exists
 	\thesisAppendixPage 
 	\begin{appendices}
+		\appendix % Vaclav Cibur compile fix
 		\include{appendixA}
 		\include{appendixB}
 	\end{appendices}
