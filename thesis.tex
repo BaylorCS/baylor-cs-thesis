@@ -14,7 +14,8 @@
 \usepackage{amsmath}
 \usepackage{chicago}
 \usepackage{lipsum} % Because this comes with a demo
-\usepackage{hyperref}
+\usepackage{hyperref}  % for workin links and bookmarks (alexsalo)
+\usepackage{bookmark}  % faster bookmarks manegment (alexsalo)
 
 % Thesis parameters
 \title{Baylor University Master's Thesis \LaTeX\ Template}
@@ -70,7 +71,8 @@ Nulla euismod dolor nec nulla ornare blandit.}
 
 % Document body
 \begin{document}
-
+	\pdfbookmark[-1]{CONTENT}{bookmark:Content}  % Top level bookmark to hold all chapters
+	
 	% Chapters
 	\include{ch1}
 	\include{ch2} 

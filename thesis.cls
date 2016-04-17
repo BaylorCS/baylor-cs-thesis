@@ -439,6 +439,7 @@
 {
 	\if@makeLoF
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\phantomsection  % Anchor the bookmark to this position
 		\addcontentsline{toc}{part}{\normalsize\normalfont\LoFname}
 		\renewcommand*{\listfigurename}{\vspace*{-0.27in}\centering\normalsize\normalfont\LoFname\vspace{-0.25in}}
 		\begin{singlespace}
@@ -452,6 +453,7 @@
 \newcommand{\thesisLoTpage}{
 	\if@makeLoT
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\phantomsection  % Anchor the bookmark to this position
 		\addcontentsline{toc}{part}{\normalsize\normalfont\LoTname}
 		\renewcommand*{\listtablename}{\vspace*{-0.27in}\centering\normalsize\normalfont\LoTname\vspace{-0.25in}}
 		\begin{singlespace}
@@ -467,6 +469,7 @@
 	\if@makeAcknowledgements
 		\thispagestyle{plain}
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\phantomsection  % Anchor the bookmark to this position
 		\addcontentsline{toc}{part}{\normalsize\normalfont\acknowledgename}
 		\begin{center}\vspace*{0.3in}\normalfont\normalsize\acknowledgename\end{center}
 		\hspace{\parindent}
@@ -481,6 +484,7 @@
 	\if@makeDedication		
 		\thispagestyle{plain}
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\phantomsection  % Anchor the bookmark to this position
 		\addcontentsline{toc}{part}{\normalsize\normalfont\dedicationname}
 		%\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % SHOWS the dedication title on the page
 		\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % DOES NOT show the dedication title on the actual page
@@ -494,6 +498,7 @@
 
 		\thispagestyle{plain}
 		\addtocontents{toc}{\protect\vspace{-0.25in}}
+		\phantomsection  % Anchor the bookmark to this position
 		\addcontentsline{toc}{part}{\normalsize\normalfont\appendicestitle}
 		%\begin{center}\vspace*{0.25in}\normalfont\normalsize{}\end{center} % SHOWS the dedication title on the page
 		\vspace*{\fill}
