@@ -81,7 +81,7 @@
 % Set the caption label separator and spacing for all floats
 \RequirePackage{caption}
 \captionsetup{labelsep=period,font=singlespacing}
-\captionsetup[table]{belowskip=-0.1em, aboveskip=1em, justification=centering} 
+\captionsetup[table]{belowskip=-0.1em, aboveskip=1em}%, justification=centering} 
 %\captionsetup[figure]{belowskip=2em, aboveskip=2em}
 
 % because we set this which determines the distance between the table 
@@ -100,7 +100,7 @@
 % Optional additional packages
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
-\RequirePackage{chicago}
+%\RequirePackage{chicago}
 % ALVIN: Needs this
 \RequirePackage{multirow}
 \RequirePackage{hhline}
@@ -140,7 +140,7 @@
 \renewcommand*{\theenumii}{\alph{enumii}}
 \renewcommand*{\theenumiii}{\roman{enumiii}}
 \renewcommand*{\theenumiv}{\alph{enumiv}}
-\renewcommand*{\labelenumi}{(\theenumi)}
+\renewcommand*{\labelenumi}{\theenumi.}
 \renewcommand*{\labelenumii}{(\theenumii)}
 \renewcommand*{\labelenumiii}{(\theenumiii)}
 \renewcommand*{\labelenumiv}{(\theenumiii.\theenumiv)}
@@ -324,7 +324,7 @@
 		\thesisTitle \\
 		by \\
 		\thesisAuthorName, \thesisHolding \\
-		A Thesis \\
+		A Project \\
 		Approved by the \thesisDepartment
 		\thesisSignature{\thesisDepartmentChair, Chairperson}{97mm}
 	\\
