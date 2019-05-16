@@ -81,7 +81,7 @@
 % Set the caption label separator and spacing for all floats
 \RequirePackage{caption}
 \captionsetup{labelsep=period,font=singlespacing}
-\captionsetup[table]{belowskip=-0.1em, aboveskip=1em, justification=centering}
+\captionsetup[table]{belowskip=-0.1em, aboveskip=1em, justification=centering} 
 %\captionsetup[figure]{belowskip=2em, aboveskip=2em}
 
 % because we set this which determines the distance between the table 
