@@ -100,7 +100,7 @@
 % Optional additional packages
 \RequirePackage{graphicx}
 \RequirePackage{amsmath}
-\RequirePackage{chicago}
+%\RequirePackage{chicago}
 % ALVIN: Needs this
 \RequirePackage{multirow}
 \RequirePackage{hhline}
